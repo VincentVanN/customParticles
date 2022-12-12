@@ -3,8 +3,9 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray = [];
-let adjustX = canvas.width / 200;
-let adjustY = canvas.height / 200;
+let adjustX = canvas.width / 400;
+let adjustY = canvas.height / 400;
+
 //handle mouse 
 const mouse = {
   x: null,
@@ -15,10 +16,15 @@ window.addEventListener('mousemove', function(e) {
   mouse.x = e.x + canvas.clientLeft / 2;
   mouse.y = e.y + canvas.clientTop / 2;
 });
+window.addEventListener('resize', function() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
 
 ctx.fillStyle = 'white';
-ctx.font = '30px Verdana';
-ctx.fillText('DeV frontEnd', 0, 40)
+ctx.font = '30px Helvetica';
+ctx.textBaseline = 'top';
+ctx.fillText('FrontEnd', 0, 40)
 const textCoordinates = ctx.getImageData(0, 0, canvas.width, 100);
 
 class Particle {
