@@ -3,8 +3,8 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray = [];
-let adjustX = canvas.width / 400;
-let adjustY = canvas.height / 400;
+let adjustX = canvas.width / 100;
+let adjustY = canvas.height / 200;
 
 //handle mouse 
 const mouse = {
