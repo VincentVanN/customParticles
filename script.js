@@ -16,16 +16,11 @@ window.addEventListener('mousemove', function(e) {
   mouse.x = e.x + canvas.clientLeft / 2;
   mouse.y = e.y + canvas.clientTop / 2;
 });
-window.addEventListener('resize', function() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
 
 ctx.fillStyle = 'white';
 ctx.font = '30px Helvetica';
-ctx.textBaseline = 'top';
 ctx.fillText('FrontEnd', 0, 40)
-const textCoordinates = ctx.getImageData(0, 0, canvas.width, 100);
+const textCoordinates = ctx.getImageData(0, 0, canvas.width, 300);
 
 class Particle {
   constructor(x, y) {
@@ -85,8 +80,8 @@ function init() {
     for (let x = 0, x2 = textCoordinates.width; x < x2; x++) {
       //push pixel in array when alpha > 128 (50% because opacity 1 === 255)
       if (textCoordinates.data[(y * 4 * textCoordinates.width) + (x * 4) + 3] > 128) {
-        let positionX = x + adjustX;
-        let positionY = y + adjustY;
+        let positionX = x;
+        let positionY = y;
         particleArray.push(new Particle(positionX * 12, positionY * 12));
       }
     }
@@ -110,7 +105,7 @@ animate();
 window.addEventListener("resize", function () {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
-  adjustX = -60 + canvas.width / 30;
+  adjustX = -90 + canvas.width / 30;
   adjustY = -32 + canvas.height / 30;
   init();
 });
