@@ -3,9 +3,9 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let particleArray = [];
-let adjustX = canvas.width / 100;
+let adjustX = canvas.width / 200;
 let adjustY = canvas.height / 200;
-
+let textCoordinates;
 //handle mouse 
 const mouse = {
   x: null,
@@ -16,11 +16,11 @@ window.addEventListener('mousemove', function(e) {
   mouse.x = e.x + canvas.clientLeft / 2;
   mouse.y = e.y + canvas.clientTop / 2;
 });
-
+console.log(canvas.width, canvas.height);
 ctx.fillStyle = 'white';
-ctx.font = '30px Helvetica';
-ctx.fillText('FrontEnd', 0, 40)
-const textCoordinates = ctx.getImageData(0, 0, canvas.width, 300);
+ctx.font = '18px Verdana';
+ctx.fillText('FrontEnd', 26, 40)
+textCoordinates = ctx.getImageData(0, 0, canvas.width, 100);
 
 class Particle {
   constructor(x, y) {
@@ -80,8 +80,8 @@ function init() {
     for (let x = 0, x2 = textCoordinates.width; x < x2; x++) {
       //push pixel in array when alpha > 128 (50% because opacity 1 === 255)
       if (textCoordinates.data[(y * 4 * textCoordinates.width) + (x * 4) + 3] > 128) {
-        let positionX = x;
-        let positionY = y;
+        let positionX = x + adjustX;
+        let positionY = y + adjustY;
         particleArray.push(new Particle(positionX * 12, positionY * 12));
       }
     }
@@ -102,11 +102,13 @@ init();
 animate();
 
 // RESIZE SETTING - empty and refill particle array every time window changes size + change canvas size
+
 window.addEventListener("resize", function () {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
-  adjustX = -90 + canvas.width / 30;
+  adjustX = -60 + canvas.width / 30;
   adjustY = -32 + canvas.height / 30;
+  console.log(canvas.width, canvas.height);
   init();
 });
 
